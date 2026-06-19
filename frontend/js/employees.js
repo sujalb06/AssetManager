@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('employeeTableBody');
 
     // Employee Backend API
-    const API_URL = 'http://localhost:5000/api/employees';
+    const API_URL = 'https://assetmanager-utjo.onrender.com/api/employees';
 
     // --- 1. MODAL LOGIC ---
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));

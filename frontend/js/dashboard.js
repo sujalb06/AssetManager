@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         // 2. Fetch data from BOTH APIs at the exact same time! (Pro Developer trick)
         const [assetsResponse, employeesResponse] = await Promise.all([
-            fetch('http://localhost:5000/api/assets'),
-            fetch('http://localhost:5000/api/employees')
+            fetch('https://assetmanager-utjo.onrender.com/api/assets'),
+            fetch('https://assetmanager-utjo.onrender.com/api/employees')
         ]);
 
         // 3. Convert the responses to JSON data

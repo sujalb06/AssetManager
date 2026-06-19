@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('maintenanceTableBody');
     const assetSelect = document.getElementById('brokenAssetSelect');
 
-    const BASE_URL = 'http://localhost:5000/api';
+    const BASE_URL = 'https://assetmanager-utjo.onrender.com/api';
 
     // --- 2. MODAL LOGIC ---
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));

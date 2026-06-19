@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const employeeSelect = document.getElementById('employeeSelect');
 
     // API URLs
-    const BASE_URL = 'http://localhost:5000/api';
+    const BASE_URL = 'https://assetmanager-utjo.onrender.com/api';
 
     // --- 1. MODAL LOGIC ---
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));

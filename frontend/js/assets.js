@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('assetTableBody');
     const modalTitle = document.getElementById('modalTitle');
 
-    const API_URL = 'http://localhost:5000/api/assets';
+    const API_URL = 'https://assetmanager-utjo.onrender.com/api/assets';
     
     let allAssets = []; 
     let isEditing = false;

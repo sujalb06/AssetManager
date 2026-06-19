@@ -1,0 +1,41 @@
+/* --- Maintenance Data Table --- */
+.table-container {
+    background-color: var(--white); border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); overflow-x: auto; margin-top: 1.5rem;
+}
+  
+.data-table { width: 100%; border-collapse: collapse; text-align: left; }
+.data-table th, .data-table td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+.data-table th { background-color: #f9fafb; color: var(--text-light); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+.data-table tr:hover { background-color: #f9fafb; }
+  
+/* Maintenance Badges */
+.badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; }
+.badge.in-repair { background-color: #ffedd5; color: #c2410c; } /* Orange */
+.badge.completed { background-color: #d1fae5; color: #065f46; } /* Green */
+  
+.action-btn { background: none; border: none; color: var(--primary-color); cursor: pointer; margin-right: 0.5rem; font-weight: 500; }
+.action-btn.resolve { color: #10b981; } 
+  
+/* --- Modal (Popup Window) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; 
+    justify-content: center; align-items: center; z-index: 1000;
+}
+.modal-overlay.active { display: flex; }
+.modal-content { background-color: var(--white); padding: 2rem; border-radius: 8px; width: 100%; max-width: 500px; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+
+/* Additional Input Styles */
+select, textarea {
+    width: 100%; padding: 0.75rem; border: 1px solid var(--border-color);
+    border-radius: 4px; font-size: 1rem; outline: none; background-color: var(--white);
+    font-family: inherit;
+}
+textarea {
+    resize: vertical; /* Allows the user to only drag it up and down, not sideways */
+    min-height: 80px;
+}

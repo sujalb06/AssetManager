@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Logs</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/assignments.css"> </head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">AssetSystem</div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="assets.html">Assets</a></li>
+                <li><a href="assignments.html">Assignments</a></li>
+                <li><a href="maintenance.html" class="active">Maintenance</a></li>
+            </ul>
+            <a href="../index.html" class="logout-btn">Log Out</a>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2>Maintenance Logs</h2>
+                <button class="btn" id="openMaintenanceBtn" style="width: auto;">+ Log Repair</button>
+            </header>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Asset Name</th>
+                            <th>Issue Description</th>
+                            <th>Cost (₹)</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintenanceTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="maintenanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Send Asset to Maintenance</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <form id="maintenanceForm">
+                <div class="form-group">
+                    <label for="brokenAssetSelect">Select Asset</label>
+                    <select id="brokenAssetSelect" required>
+                        <option value="">-- Loading Assets... --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="issueDesc">Issue Description</label>
+                    <input type="text" id="issueDesc" required placeholder="e.g., Screen flickering, Keyboard broken">
+                </div>
+
+                <div class="form-group">
+                    <label for="repairCost">Estimated Cost (₹)</label>
+                    <input type="number" id="repairCost" required placeholder="e.g., 1500" min="0">
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Log Repair</button>
+            </form>
+        </div>
+    </div>
+        
+    <script src="../js/maintenance.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../css/global.css">
+        <link rel="stylesheet" href="../css/employees.css">
+</head>
+<body>
+        <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">AssetSystem</div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="employees.html" class="active">Employees</a></li>
+                <li><a href="assets.html">Assets</a></li>
+                <li><a href="assignments.html">Assignments</a></li>
+                <li><a href="maintenance.html">Maintenance</a></li>
+            </ul>
+            <a href="../index.html" class="logout-btn">Log Out</a>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2>Manage Employees</h2>
+                <button class="btn" id="openAddEmployeeBtn" style="width: auto;">+ Add Employee</button>
+            </header>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody">
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="modal-overlay" id="addEmployeeModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add New Employee</h2>
+                        <button class="close-btn" id="closeModalBtn">&times;</button>
+                    </div>
+                    
+                    <form id="addEmployeeForm">
+                        <div class="form-group">
+                            <label for="empName">Full Name</label>
+                            <input type="text" id="empName" required placeholder="e.g., Rahul Sharma">
+                        </div>
+                        <div class="form-group">
+                            <label for="empEmail">Email Address</label>
+                            <input type="email" id="empEmail" required placeholder="e.g., rahul@college.edu">
+                        </div>
+                        <div class="form-group">
+                            <label for="empDepartment">Department</label>
+                            <input type="text" id="empDepartment" required placeholder="e.g., Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label for="empRole">Role</label>
+                            <select id="empRole" required>
+                                <option value="Staff">Staff</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Save Employee</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+
+    <script src="../js/employees.js"></script>
+
+</body>
+</html>

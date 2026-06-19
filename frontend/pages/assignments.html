@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Assignments</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/assignments.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">AssetSystem</div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="assets.html">Assets</a></li>
+                <li><a href="assignments.html" class="active">Assignments</a></li>
+                <li><a href="maintenance.html">Maintenance</a></li>
+            </ul>
+            <a href="../index.html" class="logout-btn">Log Out</a>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2>Asset Assignments</h2>
+                <button class="btn" id="openAssignModalBtn" style="width: auto;">+ Assign Asset</button>
+            </header>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Asset Name</th>
+                            <th>Assigned To</th>
+                            <th>Date Assigned</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assignmentTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="addAssignmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Assign Asset to Employee</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <form id="assignAssetForm">
+                <div class="form-group">
+                    <label for="assetSelect">Select Available Asset</label>
+                    <select id="assetSelect" required>
+                        <option value="">-- Loading Assets... --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employeeSelect">Select Employee</label>
+                    <select id="employeeSelect" required>
+                        <option value="">-- Loading Employees... --</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Assign Asset</button>
+            </form>
+        </div>
+    </div>
+        
+    <script src="../js/assignments.js"></script>
+</body>
+</html>

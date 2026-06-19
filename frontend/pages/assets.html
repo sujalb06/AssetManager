@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Assets</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/assets.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">AssetSystem</div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="assets.html" class="active">Assets</a></li>
+                <li><a href="assignments.html">Assignments</a></li>
+                <li><a href="maintenance.html">Maintenance</a></li>
+            </ul>
+            <a href="../index.html" class="logout-btn">Log Out</a>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2>Manage Assets</h2>
+                <button class="btn" id="openAddAssetBtn" style="width: auto;">+ Add New Asset</button>
+            </header>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Asset Tag</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assetTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="addAssetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Asset</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <form id="addAssetForm">
+                <div class="form-group">
+                    <label for="assetTag">Asset Tag</label>
+                    <input type="text" id="assetTag" required placeholder="e.g., LAP-001">
+                </div>
+                
+                <div class="form-group">
+                    <label for="assetName">Asset Name</label>
+                    <input type="text" id="assetName" required placeholder="e.g., MacBook Pro M2">
+                </div>
+
+                <div class="form-group">
+                    <label for="assetCategory">Category</label>
+                    <input type="text" id="assetCategory" required placeholder="e.g., Laptop, Projector">
+                </div>
+
+                <div class="form-group">
+                    <label for="assetStatus">Status</label>
+                    <select id="assetStatus" required>
+                        <option value="Available">Available</option>
+                        <option value="In Use">In Use</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Save Asset</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/assets.js"></script>
+</body>
+</html>

@@ -148,3 +148,26 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDropdownData();
     fetchAssignments();
 });
+
+
+
+
+
+
+
+
+// =========================================
+// MOBILE SIDEBAR TOGGLE LOGIC
+// Instructor Note: Attaches a click event listener to the hamburger button to toggle the 'active' class on the sidebar, triggering the CSS transition.
+// =========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (mobileMenuBtn && sidebar) {
+        mobileMenuBtn.addEventListener('click', () => {
+            // Toggles the sliding animation class
+            sidebar.classList.toggle('active');
+        });
+    }
+});

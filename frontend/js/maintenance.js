@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. UI Elements
     const openModalBtn = document.getElementById('openMaintenanceBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalOverlay = document.getElementById('maintenanceModal');
@@ -9,20 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const BASE_URL = 'https://assetmanager-utjo.onrender.com/api';
 
-    // --- 2. MODAL LOGIC ---
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));
     closeModalBtn.addEventListener('click', () => {
         maintenanceForm.reset();
         modalOverlay.classList.remove('active');
     });
 
-    // --- 3. LOAD ASSETS FOR DROPDOWN ---
     const loadAssetsDropdown = async () => {
         try {
             const response = await fetch(`${BASE_URL}/assets`);
             const assets = await response.json();
 
-            // Only show assets that are NOT already in maintenance
             const availableForRepair = assets.filter(a => a.status !== 'Maintenance');
             
             assetSelect.innerHTML = '<option value="" disabled selected>-- Choose an Asset --</option>';
@@ -39,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 4. FETCH & DISPLAY MAINTENANCE LOGS ---
     const fetchLogs = async () => {
         try {
             const response = await fetch(`${BASE_URL}/maintenance`);
@@ -53,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 let badgeClass = log.status === 'Completed' ? 'available' : 'maintenance';
                 
                 tr.innerHTML = `
-                    <td>${log.asset ? log.asset.name : 'Deleted Asset'}</td>
-                    <td>${log.issueDescription}</td>
-                    <td>₹${log.cost}</td>
-                    <td><span class="badge ${badgeClass}">${log.status}</span></td>
-                    <td>
+                    <td data-label="Asset Name">${log.asset ? log.asset.name : 'Deleted Asset'}</td>
+                    <td data-label="Issue">${log.issueDescription}</td>
+                    <td data-label="Cost">₹${log.cost}</td>
+                    <td data-label="Status"><span class="badge ${badgeClass}">${log.status}</span></td>
+                    <td data-label="Actions">
                         ${log.status === 'Pending' 
                             ? `<button class="action-btn edit resolve-btn" data-id="${log._id}">Mark Resolved</button>` 
                             : `<span style="color: #888; font-size: 14px;">Done</span>`
@@ -71,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 5. LOG A NEW REPAIR (POST) ---
     maintenanceForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -101,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 6. RESOLVE REPAIR (PUT) ---
     tableBody.addEventListener('click', async (event) => {
         if (event.target.classList.contains('resolve-btn')) {
             const logId = event.target.getAttribute('data-id');
@@ -121,33 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initialize
     loadAssetsDropdown();
     fetchLogs();
 });
 
-
-
-
-
-
-
-
-
-
-
-
-// =========================================
-// MOBILE SIDEBAR TOGGLE LOGIC
-// Instructor Note: Attaches a click event listener to the hamburger button to toggle the 'active' class on the sidebar, triggering the CSS transition.
-// =========================================
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.querySelector('.sidebar');
 
     if (mobileMenuBtn && sidebar) {
         mobileMenuBtn.addEventListener('click', () => {
-            // Toggles the sliding animation class
             sidebar.classList.toggle('active');
         });
     }

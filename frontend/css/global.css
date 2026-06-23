@@ -1,4 +1,6 @@
 /* --- Global Reset & Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
@@ -9,7 +11,8 @@
   --border-color: #e5e7eb;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+/* Instructor Note: Applied 'Inter' font globally for a formal, modern corporate UI */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
 body { background-color: var(--bg-color); color: var(--text-main); }
 
@@ -40,68 +43,51 @@ body { background-color: var(--bg-color); color: var(--text-main); }
 .main-content { flex-grow: 1; padding: 2rem; overflow-y: auto; }
 .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 
-
-
-/* Table ko mobile screen se bahar jaane se rokne ke liye */
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;  /* Jab table badi hogi, toh horizontally scroll hogi */
-    -webkit-overflow-scrolling: touch; /* Mobile par smooth scroll ke liye */
-}
-
-
 /* =========================================
    SIDEBAR & MOBILE RESPONSIVENESS (Sliding Menu)
-   Instructor Note: Implementing an off-canvas sliding sidebar for mobile viewports using CSS transitions.
    ========================================= */
 
-/* 1. Hide the hamburger button on desktop view */
 .hamburger-btn {
     display: none; 
     font-size: 28px;
     background: none;
     border: none;
-    color: #333; /* Agar apka background dark hai, toh isko #fff kar lein */
+    color: #333; 
     cursor: pointer;
     position: fixed;
     top: 15px;
     left: 15px;
-    z-index: 1001; /* Ensures button stays above all other UI elements */
+    z-index: 1001; 
 }
 
 @media screen and (max-width: 768px) {
     
-    /* 2. Show the hamburger menu button */
     .hamburger-btn {
         display: block;
     }
 
-    /* 3. Convert Sidebar to an Off-Canvas Sliding Menu */
     .sidebar {
         position: fixed !important;
         top: 0;
-        left: -250px; /* Hides the sidebar completely off-screen to the left */
+        left: -250px; 
         width: 250px !important;
-        height: 100vh !important; /* Forces full viewport height */
-        z-index: 1000; /* Stacks the sidebar above the main content */
-        transition: left 0.3s ease-in-out; /* Smooth sliding animation */
-        padding-top: 70px !important; /* Leaves space so menu items aren't hidden behind the button */
-        flex-direction: column !important; /* Ensures menu items stack vertically */
+        height: 100vh !important; 
+        z-index: 1000; 
+        transition: left 0.3s ease-in-out; 
+        padding-top: 70px !important; 
+        flex-direction: column !important; 
     }
 
-    /* Instructor Note: This class is toggled via JavaScript to slide the menu into view */
     .sidebar.active {
-        left: 0 !important; /* Brings the sidebar onto the screen */
+        left: 0 !important; 
     }
 
-    /* 4. Main Content Adjustments */
     .main-content {
         width: 100% !important;
         margin-left: 0 !important;
-        padding: 70px 15px 15px 15px !important; /* Top padding to avoid hiding behind the fixed hamburger icon */
+        padding: 70px 15px 15px 15px !important; 
     }
 
-    /* 5. Fix Dashboard Cards for Mobile */
     .dashboard-cards-container {
         display: flex !important;
         flex-direction: column !important;
@@ -111,35 +97,46 @@ body { background-color: var(--bg-color); color: var(--text-main); }
         width: 100% !important;
     }
 
-
-
-
-
-
     /* =========================================
-       TABLE MOBILE SCROLL FIX
-       Instructor Note: Forces the table container to respect the viewport width and enables horizontal scrolling for the table data itself without breaking the page layout.
+       TABLE TO CARD VIEW (MOBILE)
        ========================================= */
        
-    /* 1. Safed dabba (white card) screen ke andar fix karna */
-    .table-container {
-        width: 100% !important;
-        padding: 10px !important;
-        margin: 0 !important;
-        box-sizing: border-box !important;
+    .data-table thead {
+        display: none; 
     }
 
-    /* 2. Scrollable wrapper ko activate karna */
-    .table-wrapper {
-        width: 100% !important;
-        overflow-x: auto !important;
-        display: block !important; /* Instructor Note: 'block' display is crucial here to force the overflow property to work on tables */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iPhones/touch devices */
+    .data-table, .data-table tbody, .data-table tr, .data-table td {
+        display: block;
+        width: 100%;
     }
 
-    /* 3. Table ko shrink hone se rokna taaki wo proper scroll ho */
-    .data-table {
-        width: 100% !important;
-        min-width: 500px !important; /* Instructor Note: Ensures the table maintains a readable width, forcing the parent wrapper to scroll horizontally */
+    .data-table tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background-color: var(--white);
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .data-table td {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        text-align: right;
+        padding: 10px 5px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table td:last-child {
+        border-bottom: none;
+    }
+
+    .data-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        color: var(--text-light);
+        padding-right: 15px;
     }
 }

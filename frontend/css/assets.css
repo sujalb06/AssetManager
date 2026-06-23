@@ -14,14 +14,22 @@
 .badge.in-use { background-color: #dbeafe; color: #1e40af; }
 .badge.maintenance { background-color: #fee2e2; color: #991b1b; }
   
-.action-btn { background: none; border: none; color: var(--primary-color); cursor: pointer; margin-right: 0.5rem; font-weight: 500; }
-.action-btn.delete { color: #ef4444; }
+/* Instructor Note: Action buttons now feature explicit backgrounds, padding, and hover states for improved UX */
+.action-btn { 
+    background-color: #eff6ff; border: 1px solid #bfdbfe; color: var(--primary-color); 
+    cursor: pointer; margin-right: 0.5rem; font-weight: 600; 
+    padding: 0.4rem 0.8rem; border-radius: 6px; transition: 0.2s ease-in-out;
+}
+.action-btn:hover { background-color: var(--primary-color); color: var(--white); }
+
+.action-btn.delete { background-color: #fef2f2; border-color: #fecaca; color: #ef4444; }
+.action-btn.delete:hover { background-color: #ef4444; color: var(--white); }
   
 /* --- Modal (Popup Window) --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
+    display: none; 
     justify-content: center; align-items: center; z-index: 1000;
 }
 .modal-overlay.active { display: flex; }
@@ -29,9 +37,4 @@
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
 
-
-/* Center and stretch the form button inside the modal */
-.modal-content .btn {
-    width: 100%;
-    margin-top: 1rem;
-}
+.modal-content .btn { width: 100%; margin-top: 1rem; }

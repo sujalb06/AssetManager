@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Assets</title>
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <script src="../js/auth-guard.js"></script>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/assets.css">
 </head>
@@ -24,9 +30,13 @@
         </aside>
 
         <main class="main-content">
-            <header class="top-header">
+            <header class="top-header" style="flex-wrap: wrap; gap: 15px;">
                 <h2>Manage Assets</h2>
-                <button class="btn" id="openAddAssetBtn" style="width: auto;">+ Add New Asset</button>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                    <input type="text" id="searchInput" placeholder="Search by Name, Tag, or Category..." style="padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 4px; min-width: 250px;">
+                    <button class="btn" id="openAddAssetBtn" style="width: auto;">+ Add New Asset</button>
+                </div>
             </header>
 
             <div class="table-container">

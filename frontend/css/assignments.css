@@ -11,11 +11,17 @@
   
 /* Assignment Badges */
 .badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; }
-.badge.active { background-color: #dbeafe; color: #1e40af; } /* Blue */
-.badge.returned { background-color: #f3f4f6; color: #6b7280; } /* Gray */
+.badge.active { background-color: #dbeafe; color: #1e40af; } 
+.badge.returned { background-color: #f3f4f6; color: #6b7280; } 
   
-.action-btn { background: none; border: none; color: var(--primary-color); cursor: pointer; margin-right: 0.5rem; font-weight: 500; }
-.action-btn.return { color: #10b981; } /* Green button for returning an asset */
+/* Instructor Note: Action buttons now feature explicit backgrounds, padding, and hover states for improved UX */
+.action-btn { 
+    background-color: #eff6ff; border: 1px solid #bfdbfe; color: var(--primary-color); 
+    cursor: pointer; margin-right: 0.5rem; font-weight: 600; 
+    padding: 0.4rem 0.8rem; border-radius: 6px; transition: 0.2s ease-in-out;
+}
+.action-btn.return { background-color: #ecfdf5; border-color: #a7f3d0; color: #10b981; } 
+.action-btn.return:hover { background-color: #10b981; color: var(--white); }
   
 /* --- Modal (Popup Window) --- */
 .modal-overlay {
@@ -29,7 +35,6 @@
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
 
-/* Styling for Dropdown menus */
 select {
     width: 100%; padding: 0.75rem; border: 1px solid var(--border-color);
     border-radius: 4px; font-size: 1rem; outline: none; background-color: var(--white);

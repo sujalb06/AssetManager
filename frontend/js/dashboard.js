@@ -1,35 +1,59 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // 1. Grab all the HTML elements where numbers will go
     const totalAssetsEl = document.getElementById('totalAssets');
     const inUseAssetsEl = document.getElementById('inUseAssets');
     const maintenanceAssetsEl = document.getElementById('maintenanceAssets');
     const totalEmployeesEl = document.getElementById('totalEmployees');
 
     try {
-        // 2. Fetch data from BOTH APIs at the exact same time! (Pro Developer trick)
         const [assetsResponse, employeesResponse] = await Promise.all([
             fetch('https://assetmanager-utjo.onrender.com/api/assets'),
             fetch('https://assetmanager-utjo.onrender.com/api/employees')
         ]);
 
-        // 3. Convert the responses to JSON data
         const assets = await assetsResponse.json();
         const employees = await employeesResponse.json();
 
-        // 4. Do the math!
         const totalAssetsCount = assets.length;
         const totalEmployeesCount = employees.length;
         
-        // Filter out specific statuses
         const inUseCount = assets.filter(asset => asset.status === 'In Use').length;
         const maintenanceCount = assets.filter(asset => asset.status === 'Maintenance').length;
+        const availableCount = assets.filter(asset => asset.status === 'Available').length; // Added for chart
 
-        // 5. Update the HTML with the final numbers
         totalAssetsEl.innerText = totalAssetsCount;
         inUseAssetsEl.innerText = inUseCount;
         maintenanceAssetsEl.innerText = maintenanceCount;
         totalEmployeesEl.innerText = totalEmployeesCount;
+
+        // Chart.js Rendering Logic
+        const ctx = document.getElementById('assetStatusChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Available', 'In Use', 'In Maintenance'],
+                    datasets: [{
+                        label: 'Number of Assets',
+                        data: [availableCount, inUseCount, maintenanceCount],
+                        backgroundColor: [
+                            '#4CAF50', // Green
+                            '#2196F3', // Blue
+                            '#F44336'  // Red
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        }
 
     } catch (error) {
         console.error("Error loading dashboard data:", error);
@@ -37,24 +61,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
-
-
-
-
-
-
-// =========================================
-// MOBILE SIDEBAR TOGGLE LOGIC
-// Instructor Note: Attaches a click event listener to the hamburger button to toggle the 'active' class on the sidebar, triggering the CSS transition.
-// =========================================
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.querySelector('.sidebar');
 
     if (mobileMenuBtn && sidebar) {
         mobileMenuBtn.addEventListener('click', () => {
-            // Toggles the sliding animation class
             sidebar.classList.toggle('active');
         });
     }

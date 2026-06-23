@@ -1,29 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // UI Elements
     const openModalBtn = document.getElementById('openAssignModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalOverlay = document.getElementById('addAssignmentModal');
     const assignAssetForm = document.getElementById('assignAssetForm');
     const tableBody = document.getElementById('assignmentTableBody');
     
-    // Dropdowns
     const assetSelect = document.getElementById('assetSelect');
     const employeeSelect = document.getElementById('employeeSelect');
 
-    // API URLs
     const BASE_URL = 'https://assetmanager-utjo.onrender.com/api';
 
-    // --- 1. MODAL LOGIC ---
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));
     closeModalBtn.addEventListener('click', () => {
         assignAssetForm.reset();
         modalOverlay.classList.remove('active');
     });
 
-    // --- 2. FETCH DROPDOWN DATA (Assets & Employees) ---
     const loadDropdownData = async () => {
         try {
-            // Fetch both at the same time using Promise.all
             const [assetsRes, employeesRes] = await Promise.all([
                 fetch(`${BASE_URL}/assets`),
                 fetch(`${BASE_URL}/employees`)
@@ -32,9 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const assets = await assetsRes.json();
             const employees = await employeesRes.json();
 
-            // Populate Assets Dropdown (ONLY 'Available' assets)
             const availableAssets = assets.filter(a => a.status === 'Available');
-            assetSelect.innerHTML = '<option value="">-- Select an Asset --</option>'; // Clear loading text
+            assetSelect.innerHTML = '<option value="">-- Select an Asset --</option>'; 
             
             if (availableAssets.length === 0) {
                 assetSelect.innerHTML += '<option value="" disabled>No assets available!</option>';
@@ -44,8 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Populate Employees Dropdown
-            employeeSelect.innerHTML = '<option value="">-- Select an Employee --</option>'; // Clear loading text
+            employeeSelect.innerHTML = '<option value="">-- Select an Employee --</option>'; 
             employees.forEach(emp => {
                 employeeSelect.innerHTML += `<option value="${emp._id}">${emp.name} (${emp.department})</option>`;
             });
@@ -55,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 3. FETCH AND DISPLAY ASSIGNMENTS ---
     const fetchAssignments = async () => {
         try {
             const response = await fetch(`${BASE_URL}/assignments`);
@@ -66,19 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
             assignments.forEach(assignment => {
                 const tr = document.createElement('tr');
                 
-                // Format the date to look nice (e.g., "18 Jun 2026")
                 const dateObj = new Date(assignment.assignedDate);
                 const formattedDate = dateObj.toLocaleDateString();
 
                 let badgeClass = assignment.status === 'Active' ? 'in-use' : 'available';
                 
-                // Note: We use assignment.asset.name because we used .populate() in our backend!
                 tr.innerHTML = `
-                    <td>${assignment.asset ? assignment.asset.name : 'Deleted Asset'}</td>
-                    <td>${assignment.employee ? assignment.employee.name : 'Deleted Employee'}</td>
-                    <td>${formattedDate}</td>
-                    <td><span class="badge ${badgeClass}">${assignment.status}</span></td>
-                    <td>
+                    <td data-label="Asset Name">${assignment.asset ? assignment.asset.name : 'Deleted Asset'}</td>
+                    <td data-label="Assigned To">${assignment.employee ? assignment.employee.name : 'Deleted Employee'}</td>
+                    <td data-label="Date Assigned">${formattedDate}</td>
+                    <td data-label="Status"><span class="badge ${badgeClass}">${assignment.status}</span></td>
+                    <td data-label="Actions">
                         ${assignment.status === 'Active' 
                             ? `<button class="action-btn edit return-btn" data-id="${assignment._id}">Return</button>` 
                             : `<span style="color: #888; font-size: 14px;">Closed</span>`
@@ -92,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- 4. ASSIGN AN ASSET (Form Submit) ---
     assignAssetForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -112,9 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 assignAssetForm.reset();
                 modalOverlay.classList.remove('active');
                 
-                // Refresh data
                 fetchAssignments(); 
-                loadDropdownData(); // Refresh dropdowns so the assigned asset disappears from the list!
+                loadDropdownData(); 
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.message}`);
@@ -124,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. RETURN AN ASSET ---
     tableBody.addEventListener('click', async (event) => {
         if (event.target.classList.contains('return-btn')) {
             const assignmentId = event.target.getAttribute('data-id');
@@ -135,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         method: 'PUT'
                     });
                     
-                    fetchAssignments(); // Refresh table
-                    loadDropdownData(); // Refresh dropdowns (asset is available again!)
+                    fetchAssignments(); 
+                    loadDropdownData(); 
                 } catch (error) {
                     console.error("Error returning asset:", error);
                 }
@@ -144,29 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Run on startup
     loadDropdownData();
     fetchAssignments();
 });
 
-
-
-
-
-
-
-
-// =========================================
-// MOBILE SIDEBAR TOGGLE LOGIC
-// Instructor Note: Attaches a click event listener to the hamburger button to toggle the 'active' class on the sidebar, triggering the CSS transition.
-// =========================================
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.querySelector('.sidebar');
 
     if (mobileMenuBtn && sidebar) {
         mobileMenuBtn.addEventListener('click', () => {
-            // Toggles the sliding animation class
             sidebar.classList.toggle('active');
         });
     }

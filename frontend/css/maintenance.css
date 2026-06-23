@@ -11,11 +11,17 @@
   
 /* Maintenance Badges */
 .badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; }
-.badge.in-repair { background-color: #ffedd5; color: #c2410c; } /* Orange */
-.badge.completed { background-color: #d1fae5; color: #065f46; } /* Green */
+.badge.in-repair { background-color: #ffedd5; color: #c2410c; } 
+.badge.completed { background-color: #d1fae5; color: #065f46; } 
   
-.action-btn { background: none; border: none; color: var(--primary-color); cursor: pointer; margin-right: 0.5rem; font-weight: 500; }
-.action-btn.resolve { color: #10b981; } 
+/* Instructor Note: Action buttons now feature explicit backgrounds, padding, and hover states for improved UX */
+.action-btn { 
+    background-color: #eff6ff; border: 1px solid #bfdbfe; color: var(--primary-color); 
+    cursor: pointer; margin-right: 0.5rem; font-weight: 600; 
+    padding: 0.4rem 0.8rem; border-radius: 6px; transition: 0.2s ease-in-out;
+}
+.action-btn.resolve { background-color: #ecfdf5; border-color: #a7f3d0; color: #10b981; } 
+.action-btn.resolve:hover { background-color: #10b981; color: var(--white); }
   
 /* --- Modal (Popup Window) --- */
 .modal-overlay {
@@ -36,6 +42,6 @@ select, textarea {
     font-family: inherit;
 }
 textarea {
-    resize: vertical; /* Allows the user to only drag it up and down, not sideways */
+    resize: vertical; 
     min-height: 80px;
 }
